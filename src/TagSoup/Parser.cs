@@ -10,7 +10,7 @@ namespace TagSoup.Net {
   using Sax.Net.Helpers;
 
   /// <summary>
-  ///     The SAX parser class.
+  ///   The SAX parser class.
   /// </summary>
   public class Parser : DefaultHandler, IScanHandler, IXmlReader, ILexicalHandler {
     // Default values for feature flags
@@ -28,184 +28,184 @@ namespace TagSoup.Net {
     // Feature flags.
 
     /// <summary>
-    ///     A value of "true" indicates namespace URIs and unprefixed local
-    ///     names for element and attribute names will be available.
+    ///   A value of "true" indicates namespace URIs and unprefixed local
+    ///   names for element and attribute names will be available.
     /// </summary>
     public const string NAMESPACES_FEATURE = "http://xml.org/sax/features/namespaces";
 
     /// <summary>
-    ///     A value of "true" indicates that XML qualified names (with prefixes)
-    ///     and attributes (including xmlns* attributes) will be available.
-    ///     We don't support this value.
+    ///   A value of "true" indicates that XML qualified names (with prefixes)
+    ///   and attributes (including xmlns* attributes) will be available.
+    ///   We don't support this value.
     /// </summary>
     public const string NAMESPACE_PREFIXES_FEATURE = "http://xml.org/sax/features/namespace-prefixes";
 
     /// <summary>
-    ///     Reports whether this parser processes external general entities
-    ///     (it doe
+    ///   Reports whether this parser processes external general entities
+    ///   (it doe
     /// </summary>
     public const string EXTERNAL_GENERAL_ENTITIES_FEATURE = "http://xml.org/sax/features/external-general-entities";
 
     /// <summary>
-    ///     Reports whether this parser processes external parameter entities
-    ///     (it doesn't).
+    ///   Reports whether this parser processes external parameter entities
+    ///   (it doesn't).
     /// </summary>
     public const string EXTERNAL_PARAMETER_ENTITIES_FEATURE = "http://xml.org/sax/features/external-parameter-entities";
 
     /// <summary>
-    ///     May be examined only during a parse, after the startDocument()
-    ///     callback has been completed; read-only. The value is true if
-    ///     the document specified standalone="yes" in its XML declaration,
-    ///     and otherwise is false.  (It's always false.)
+    ///   May be examined only during a parse, after the startDocument()
+    ///   callback has been completed; read-only. The value is true if
+    ///   the document specified standalone="yes" in its XML declaration,
+    ///   and otherwise is false.  (It's always false.)
     /// </summary>
     public const string IS_STANDALONE_FEATURE = "http://xml.org/sax/features/is-standalone";
 
     /// <summary>
-    ///     A value of "true" indicates that the LexicalHandler will report
-    ///     the beginning and end of parameter entities (it won't).
+    ///   A value of "true" indicates that the LexicalHandler will report
+    ///   the beginning and end of parameter entities (it won't).
     /// </summary>
     public const string LEXICAL_HANDLER_PARAMETER_ENTITIES_FEATURE =
       "http://xml.org/sax/features/lexical-handler/parameter-entities";
 
     /// <summary>
-    ///     A value of "true" indicates that system IDs in declarations will
-    ///     be absolutized (relative to their base URIs) before reporting.
-    ///     (This returns true but doesn't actually do anything.)
+    ///   A value of "true" indicates that system IDs in declarations will
+    ///   be absolutized (relative to their base URIs) before reporting.
+    ///   (This returns true but doesn't actually do anything.)
     /// </summary>
     public const string RESOLVE_DTD_URIS_FEATURE = "http://xml.org/sax/features/resolve-dtd-uris";
 
     /// <summary>
-    ///     Has a value of "true" if all XML names (for elements,
-    ///     prefixes, attributes, entities, notations, and local
-    ///     names), as well as Namespace URIs, will have been interned
-    ///     using <see cref="string.Intern" />. This supports fast testing of
-    ///     equality/inequality against string constants, rather than forcing
-    ///     slower calls to <see cref="string.Equals(object)" />.  (We always intern.)
+    ///   Has a value of "true" if all XML names (for elements,
+    ///   prefixes, attributes, entities, notations, and local
+    ///   names), as well as Namespace URIs, will have been interned
+    ///   using <see cref="string.Intern" />. This supports fast testing of
+    ///   equality/inequality against string constants, rather than forcing
+    ///   slower calls to <see cref="string.Equals(object)" />.  (We always intern.)
     /// </summary>
     public const string STRING_INTERNING_FEATURE = "http://xml.org/sax/features/string-interning";
 
     /// <summary>
-    ///     Returns "true" if the Attributes objects passed by this
-    ///     parser in <see cref="IContentHandler.StartElement" /> implement the
-    ///     <see cref="Sax.Net.Ext.IAttributes2" /> interface.	(They don't.)
+    ///   Returns "true" if the Attributes objects passed by this
+    ///   parser in <see cref="IContentHandler.StartElement" /> implement the
+    ///   <see cref="Sax.Net.Ext.IAttributes2" /> interface.	(They don't.)
     /// </summary>
     public const string USE_ATTRIBUTES2_FEATURE = "http://xml.org/sax/features/use-attributes2";
 
     /// <summary>
-    ///     Returns "true" if the Locator objects passed by this parser
-    ///     parser in <see cref="IContentHandler.SetDocumentLocator" /> implement the
-    ///     <see cref="Sax.Net.Ext.ILocator2" /> interface.  (They don't.)
+    ///   Returns "true" if the Locator objects passed by this parser
+    ///   parser in <see cref="IContentHandler.SetDocumentLocator" /> implement the
+    ///   <see cref="Sax.Net.Ext.ILocator2" /> interface.  (They don't.)
     /// </summary>
     public const string USE_LOCATOR2_FEATURE = "http://xml.org/sax/features/use-locator2";
     /// <summary>
-    ///     Returns "true" if, when setEntityResolver is given an object
-    ///     implementing the  <see cref="Sax.Net.Ext.IEntityResolver2" /> interface,
-    ///     those new methods will be used.  (They won't be.)
+    ///   Returns "true" if, when setEntityResolver is given an object
+    ///   implementing the  <see cref="Sax.Net.Ext.IEntityResolver2" /> interface,
+    ///   those new methods will be used.  (They won't be.)
     /// </summary>
     public const string USE_ENTITY_RESOLVER2_FEATURE = "http://xml.org/sax/features/use-entity-resolver2";
 
     /// <summary>
-    ///     Controls whether the parser is reporting all validity errors
-    ///     (We don't report any validity errors.)
+    ///   Controls whether the parser is reporting all validity errors
+    ///   (We don't report any validity errors.)
     /// </summary>
     public const string VALIDATION_FEATURE = "http://xml.org/sax/features/validation";
 
     /// <summary>
-    ///     Controls whether the parser reports Unicode normalization
-    ///     errors as described in section 2.13 and Appendix B of the XML
-    ///     1.1 Recommendation.  (We don't normalize.)
+    ///   Controls whether the parser reports Unicode normalization
+    ///   errors as described in section 2.13 and Appendix B of the XML
+    ///   1.1 Recommendation.  (We don't normalize.)
     /// </summary>
     public const string UNICODE_NORMALIZATION_CHECKING_FEATURE =
       "http://xml.org/sax/features/unicode-normalization-checking";
 
     /// <summary>
-    ///     Controls whether, when the namespace-prefixes feature is set,
-    ///     the parser treats namespace declaration attributes as being in
-    ///     the http://www.w3.org/2000/xmlns/ namespace.  (It doesn't.)
+    ///   Controls whether, when the namespace-prefixes feature is set,
+    ///   the parser treats namespace declaration attributes as being in
+    ///   the http://www.w3.org/2000/xmlns/ namespace.  (It doesn't.)
     /// </summary>
     public const string XMLNS_URIS_FEATURE = "http://xml.org/sax/features/xmlns-uris";
 
     /// <summary>
-    ///     Returns <c>true</c> if the parser supports both XML 1.1 and XML 1.0.
-    ///     (Always <c>false</c>.)
+    ///   Returns <c>true</c> if the parser supports both XML 1.1 and XML 1.0.
+    ///   (Always <c>false</c>.)
     /// </summary>
     public const string XML11_FEATURE = "http://xml.org/sax/features/xml-1.1";
 
     /// <summary>
-    ///     A value of <c>true</c> indicates that the parser will ignore
-    ///     unknown elements.
+    ///   A value of <c>true</c> indicates that the parser will ignore
+    ///   unknown elements.
     /// </summary>
     public const string IGNORE_BOGONS_FEATURE = "http://www.ccil.org/~cowan/tagsoup/features/ignore-bogons";
 
     /// <summary>
-    ///     A value of <c>true</c> indicates that the parser will give unknown
-    ///     elements a content model of EMPTY; a value of <c>false</c>, a
-    ///     content model of ANY.
+    ///   A value of <c>true</c> indicates that the parser will give unknown
+    ///   elements a content model of EMPTY; a value of <c>false</c>, a
+    ///   content model of ANY.
     /// </summary>
     public const string BOGONS_EMPTY_FEATURE = "http://www.ccil.org/~cowan/tagsoup/features/bogons-empty";
 
     /// <summary>
-    ///     A value of <c>true</c> indicates that the parser will allow unknown
-    ///     elements to be the root element.
+    ///   A value of <c>true</c> indicates that the parser will allow unknown
+    ///   elements to be the root element.
     /// </summary>
     public const string ROOT_BOGONS_FEATURE = "http://www.ccil.org/~cowan/tagsoup/features/root-bogons";
 
     /// <summary>
-    ///     A value of <c>true</c> indicates that the parser will return default
-    ///     attribute values for missing attributes that have default values.
+    ///   A value of <c>true</c> indicates that the parser will return default
+    ///   attribute values for missing attributes that have default values.
     /// </summary>
     public const string DEFAULT_ATTRIBUTES_FEATURE = "http://www.ccil.org/~cowan/tagsoup/features/default-attributes";
 
     /// <summary>
-    ///     A value of <c>true</c> indicates that the parser will
-    ///     translate colons into underscores in names.
+    ///   A value of <c>true</c> indicates that the parser will
+    ///   translate colons into underscores in names.
     /// </summary>
     public const string TRANSLATE_COLONS_FEATURE = "http://www.ccil.org/~cowan/tagsoup/features/translate-colons";
 
     /// <summary>
-    ///     A value of <c>true</c> indicates that the parser will
-    ///     attempt to restart the restartable elements.
+    ///   A value of <c>true</c> indicates that the parser will
+    ///   attempt to restart the restartable elements.
     /// </summary>
     public const string RESTART_ELEMENTS_FEATURE = "http://www.ccil.org/~cowan/tagsoup/features/restart-elements";
 
     /// <summary>
-    ///     A value of "true" indicates that the parser will
-    ///     transmit whitespace in element-only content via the SAX
-    ///     ignorableWhitespace callback.  Normally this is not done,
-    ///     because HTML is an SGML application and SGML suppresses
-    ///     such whitespace.
+    ///   A value of "true" indicates that the parser will
+    ///   transmit whitespace in element-only content via the SAX
+    ///   ignorableWhitespace callback.  Normally this is not done,
+    ///   because HTML is an SGML application and SGML suppresses
+    ///   such whitespace.
     /// </summary>
     public const string IGNORABLE_WHITESPACE_FEATURE =
       "http://www.ccil.org/~cowan/tagsoup/features/ignorable-whitespace";
 
     /// <summary>
-    ///     A value of "true" indicates that the parser will treat CDATA
-    ///     elements specially.  Normally true, since the input is by
-    ///     default HTML.
+    ///   A value of "true" indicates that the parser will treat CDATA
+    ///   elements specially.  Normally true, since the input is by
+    ///   default HTML.
     /// </summary>
     public const string CDATA_ELEMENTS_FEATURE = "http://www.ccil.org/~cowan/tagsoup/features/cdata-elements";
 
     /// <summary>
-    ///     Used to see some syntax events that are essential in some
-    ///     applications: comments, CDATA delimiters, selected general
-    ///     entity inclusions, and the start and end of the DTD (and
-    ///     declaration of document element name). The Object must implement
-    ///     <see cref="ILexicalHandler" />
+    ///   Used to see some syntax events that are essential in some
+    ///   applications: comments, CDATA delimiters, selected general
+    ///   entity inclusions, and the start and end of the DTD (and
+    ///   declaration of document element name). The Object must implement
+    ///   <see cref="ILexicalHandler" />
     /// </summary>
     public const string LEXICAL_HANDLER_PROPERTY = "http://xml.org/sax/properties/lexical-handler";
 
     /// <summary>
-    ///     Specifies the Scanner object this Parser uses.
+    ///   Specifies the Scanner object this Parser uses.
     /// </summary>
     public const string SCANNER_PROPERTY = "http://www.ccil.org/~cowan/tagsoup/properties/scanner";
 
     /// <summary>
-    ///     Specifies the Schema object this Parser uses.
+    ///   Specifies the Schema object this Parser uses.
     /// </summary>
     public const string SCHEMA_PROPERTY = "http://www.ccil.org/~cowan/tagsoup/properties/schema";
 
     /// <summary>
-    ///     Specifies the AutoDetector (for encoding detection) this Parser uses.
+    ///   Specifies the AutoDetector (for encoding detection) this Parser uses.
     /// </summary>
     public const string AUTO_DETECTOR_PROPERTY = "http://www.ccil.org/~cowan/tagsoup/properties/auto-detector";
     private const string LEGAL = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-'()+,./:=?;!*#@$_%";
@@ -272,7 +272,7 @@ namespace TagSoup.Net {
     private bool _virginStack = true;
 
     /// <summary>
-    ///     Creates a new instance of <see cref="Parser" />
+    ///   Creates a new instance of <see cref="Parser" />
     /// </summary>
     public Parser() {
       _newElement = null;
@@ -358,6 +358,18 @@ namespace TagSoup.Net {
       ETagBasic(buff, offset, length);
     }
 
+    /// <summary>
+    ///   Parsing the complete XML Document Type Definition is way too complex,
+    ///   but for many simple cases we can extract something useful from it.
+    ///   doctypedecl ::= '&lt;!DOCTYPE' S Name (S ExternalID)? S? ('[' intSubset ']' S?)? '>'
+    ///   DeclSep ::= PEReference | S
+    ///   intSubset ::= (markupdecl | DeclSep)*
+    ///   markupdecl ::= elementdecl | AttlistDecl | EntityDecl | NotationDecl | PI | Comment
+    ///   ExternalID ::= 'SYSTEM' S SystemLiteral | 'PUBLIC' S PubidLiteral S SystemLiteral
+    /// </summary>
+    /// <param name="buff"></param>
+    /// <param name="offset"></param>
+    /// <param name="length"></param>
     public void Decl(char[] buff, int offset, int length) {
       var s = new string(buff, offset, length);
       string name = null;
@@ -659,8 +671,12 @@ namespace TagSoup.Net {
       _doctypeName = _doctypePublicId = _doctypeSystemId = null;
     }
 
-    // Return a Reader based on the contents of an InputSource
-    // Buffer both the InputStream and the Reader
+    /// <summary>
+    ///   Return a Reader based on the contents of an InputSource
+    ///   Buffer the Stream
+    /// </summary>
+    /// <param name="s"></param>
+    /// <returns></returns>
     private TextReader GetReader(InputSource s) {
       TextReader r = s.Reader;
       Stream i = s.Stream;
@@ -690,20 +706,26 @@ namespace TagSoup.Net {
       return r;
     }
 
-    // Get an InputStream based on a publicid and a systemid
+    /// <summary>
+    ///   Get an Stream based on a publicid and a systemid
+    ///   We don't process publicids (who uses them anyhow?)
+    /// </summary>
+    /// <param name="publicid"></param>
+    /// <param name="systemid"></param>
+    /// <returns></returns>
     private Stream GetInputStream(string publicid, string systemid) {
       var basis = new Uri("file://" + Environment.CurrentDirectory + Path.DirectorySeparatorChar);
       var url = new Uri(basis, systemid);
       return new FileStream(url.LocalPath, FileMode.Open, FileAccess.Read, FileShare.Read);
     }
 
-    // We don't process publicids (who uses them anyhow?)
-
-    // ScanHandler implementation
-
-    // Expand entity references in attribute values selectively.
-    // Currently we expand a reference iff it is properly terminated
-    // with a semicolon.
+    /// <summary>
+    ///   Expand entity references in attribute values selectively.
+    ///   Currently we expand a reference iff it is properly terminated
+    ///   with a semicolon.
+    /// </summary>
+    /// <param name="src"></param>
+    /// <returns></returns>
     private string ExpandEntities(string src) {
       int refStart = -1;
       int len = src.Length;
@@ -747,8 +769,14 @@ namespace TagSoup.Net {
       return new string(dst, 0, dstlen);
     }
 
-    // Process numeric character references,
-    // deferring to the schema for named ones.
+    /// <summary>
+    ///   Process numeric character references,
+    ///   deferring to the schema for named ones.
+    /// </summary>
+    /// <param name="buff"></param>
+    /// <param name="offset"></param>
+    /// <param name="length"></param>
+    /// <returns></returns>
     private int LookupEntity(char[] buff, int offset, int length) {
       int result = 0;
       if (length < 1) {
@@ -850,8 +878,11 @@ namespace TagSoup.Net {
       Restart(null);
     }
 
-    // Push restartables on the stack if possible
-    // e is the next element to be started, if we know what it is
+    /// <summary>
+    ///   Push restartables on the stack if possible
+    ///   e is the next element to be started, if we know what it is
+    /// </summary>
+    /// <param name="e"></param>
     private void Restart(Element e) {
       while (_saved != null && _stack.CanContain(_saved) && (e == null || _saved.CanContain(e))) {
         Element next = _saved.Next;
@@ -860,7 +891,9 @@ namespace TagSoup.Net {
       }
     }
 
-    // Pop the stack irrevocably
+    /// <summary>
+    ///   Pop the stack irrevocably
+    /// </summary>
     private void Pop() {
       if (_stack == null) {
         return; // empty stack
@@ -868,7 +901,7 @@ namespace TagSoup.Net {
       string name = _stack.Name;
       string localName = _stack.LocalName;
       string ns = _stack.Namespace;
-      string prefix = prefixOf(name);
+      string prefix = PrefixOf(name);
 
       //		System.err.println("%% Popping " + name);
       if (!_namespaces) {
@@ -882,7 +915,7 @@ namespace TagSoup.Net {
       Attributes atts = _stack.Attributes;
       for (int i = atts.Length - 1; i >= 0; i--) {
         string attNamespace = atts.GetUri(i);
-        string attPrefix = prefixOf(atts.GetQName(i));
+        string attPrefix = PrefixOf(atts.GetQName(i));
         if (Foreign(attPrefix, attNamespace)) {
           _contentHandler.EndPrefixMapping(attPrefix);
           //			System.err.println("%% Unmapping [" + attPrefix + "] for attributes to " + attNamespace);
@@ -891,7 +924,9 @@ namespace TagSoup.Net {
       _stack = _stack.Next;
     }
 
-    // Pop the stack restartably
+    /// <summary>
+    ///   Pop the stack restartably
+    /// </summary>
     private void RestartablyPop() {
       Element popped = _stack;
       Pop();
@@ -902,13 +937,15 @@ namespace TagSoup.Net {
       }
     }
 
-    // Push element onto stack
-
+    /// <summary>
+    ///   Push element onto stack
+    /// </summary>
+    /// <param name="e"></param>
     private void Push(Element e) {
       string name = e.Name;
       string localName = e.LocalName;
       string ns = e.Namespace;
-      string prefix = prefixOf(name);
+      string prefix = PrefixOf(name);
 
       //		System.err.println("%% Pushing " + name);
       e.Clean();
@@ -929,7 +966,7 @@ namespace TagSoup.Net {
       int len = atts.Length;
       for (int i = 0; i < len; i++) {
         string attNamespace = atts.GetUri(i);
-        string attPrefix = prefixOf(atts.GetQName(i));
+        string attPrefix = PrefixOf(atts.GetQName(i));
         if (Foreign(attPrefix, attNamespace)) {
           _contentHandler.StartPrefixMapping(attPrefix, attNamespace);
           //				System.err.println("%% Mapping [" + attPrefix + "] for attributes to " + attNamespace);
@@ -944,8 +981,12 @@ namespace TagSoup.Net {
       }
     }
 
-    // Get the prefix from a QName
-    private string prefixOf(string name) {
+    /// <summary>
+    ///   Get the prefix from a QName
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    private static string PrefixOf(string name) {
       int i = name.IndexOf(':');
       string prefix = "";
       if (i != -1) {
@@ -955,24 +996,18 @@ namespace TagSoup.Net {
       return prefix;
     }
 
-    // Return true if we have a foreign name
+    /// <summary>
+    ///   Return true if we have a foreign name
+    /// </summary>
+    /// <param name="prefix"></param>
+    /// <param name="ns"></param>
+    /// <returns></returns>
     private bool Foreign(string prefix, string ns) {
       //		System.err.print("%% Testing " + prefix + " and " + namespace + " for foreignness -- ");
       bool foreign = !(prefix.Equals("") || ns.Equals("") || ns.Equals(_schema.Uri));
       //		System.err.println(foreign);
       return foreign;
     }
-
-    /**
-         * Parsing the complete XML Document Type Definition is way too complex,
-         * but for many simple cases we can extract something useful from it.
-         *
-         * doctypedecl  ::= '<!DOCTYPE' S Name (S ExternalID)? S? ('[' intSubset ']' S?)? '>'
-         *  DeclSep     ::= PEReference | S
-         *  intSubset   ::= (markupdecl | DeclSep)*
-         *  markupdecl  ::= elementdecl | AttlistDecl | EntityDecl | NotationDecl | PI | Comment
-         *  ExternalID  ::= 'SYSTEM' S SystemLiteral | 'PUBLIC' S PubidLiteral S SystemLiteral
-         */
 
     // If the string is quoted, trim the quotes.
     private static string TrimQuotes(string value) {
@@ -991,8 +1026,12 @@ namespace TagSoup.Net {
       return value;
     }
 
-    // Split the supplied string into words or phrases seperated by spaces.
-    // Recognises quotes around a phrase and doesn't split it.
+    /// <summary>
+    ///   Split the supplied string into words or phrases seperated by spaces.
+    ///   Recognises quotes around a phrase and doesn't split it.
+    /// </summary>
+    /// <param name="val"></param>
+    /// <returns></returns>
     private static string[] Split(string val) {
       val = val.Trim();
       if (val.Length == 0) {
@@ -1033,8 +1072,11 @@ namespace TagSoup.Net {
       return l.ToArray();
     }
 
-    // Replace junk in publicids with spaces
-
+    /// <summary>
+    ///   Replace junk in publicids with spaces
+    /// </summary>
+    /// <param name="src"></param>
+    /// <returns></returns>
     private string CleanPublicid(string src) {
       if (src == null) {
         return null;
@@ -1059,8 +1101,11 @@ namespace TagSoup.Net {
       return dst.ToString().Trim(); // trim any final junk whitespace
     }
 
-    // Rectify the stack, pushing and popping as needed
-    // so that the argument can be safely pushed
+    /// <summary>
+    ///   Rectify the stack, pushing and popping as needed
+    ///   so that the argument can be safely pushed
+    /// </summary>
+    /// <param name="e"></param>
     private void Rectify(Element e) {
       Element sp;
       while (true) {
@@ -1101,9 +1146,15 @@ namespace TagSoup.Net {
       _newElement = null;
     }
 
-    // Return the argument as a valid XML name
-    // This no longer lowercases the result: we depend on Schema to
-    // canonicalize case.
+    /// <summary>
+    ///   Return the argument as a valid XML name
+    ///   This no longer lowercases the result: we depend on Schema to
+    ///   canonicalize case.
+    /// </summary>
+    /// <param name="buff"></param>
+    /// <param name="offset"></param>
+    /// <param name="length"></param>
+    /// <returns></returns>
     private string MakeName(char[] buff, int offset, int length) {
       var dst = new StringBuilder(length + 2);
       bool seenColon = false;
@@ -1136,8 +1187,6 @@ namespace TagSoup.Net {
       //		System.err.println("Made name \"" + dst + "\" from \"" + src + "\"");
       return string.Intern(dst.ToString());
     }
-
-    // Default LexicalHandler implementation
 
     private class AutoDetectorDelegate : IAutoDetector {
       private readonly Func<Stream, StreamReader> _delegate;

@@ -1382,5 +1382,3 @@ public class XmlWriter : XmlFilter, ILexicalHandler {
     //	System.out.println("%%%% htmlMode = " + htmlMode);
   }
 }
-
-// end of XMLWriter.java

@@ -70,7 +70,7 @@
     <Compile Include="Parser.cs" />
     <Compile Include="PYXScanner.cs" />
     <Compile Include="PYXWriter.cs" />
-    <Compile Include="ScanHandler.cs" />
+    <Compile Include="IScanHandler.cs" />
     <Compile Include="IScanner.cs" />
     <Compile Include="Schema.cs" />
     <Compile Include="XmlReaderFactory.cs" />
