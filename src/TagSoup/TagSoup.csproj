@@ -77,6 +77,7 @@
     <Compile Include="XmlWriter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="TagSoup.nuspec" />
     <None Include="HTMLScanner.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>HTMLScanner.generated.cs</LastGenOutput>
